@@ -1,5 +1,4 @@
 function checkWin() {
-    // Проверка на победу
     for (let row of field) {
         if (row[0] === row[1] && row[1] === row[2] && row[0] !== "-") {
             return row[0];
@@ -20,7 +19,6 @@ function checkWin() {
         return field[0][2];
     }
 
-    // Проверка
     let countEmpty = 0;
     for (let x = 0; x < 3; x++) {
         for (let y = 0; y < 3; y++) {
@@ -33,7 +31,6 @@ function checkWin() {
         return "tie";
     }
 
-    // Иначе возвращаем false, если не победа, не ничья
     return false;
 }
 
@@ -43,47 +40,79 @@ let field = [
     ["-", "-", "-"]
 ];
 
+function resetField() {
+    field = [
+        ["-", "-", "-"],
+        ["-", "-", "-"],
+        ["-", "-", "-"]
+    ];
+}
+
+const statusElement = document.getElementById("status")
+function updateStatus(text) {
+    statusElement.textContent = text;
+}
+
+const fieldElement = document.getElementById("field");
 function updateFieldUI() {
-    const fieldElement = document.getElementById("field");
-    fieldElement.innerHTML = ''; // Очищаем содержимое элемента
+    fieldElement.innerHTML = '';
+
+    if (turn === 'x') {
+        updateStatus("Ходит крестик")
+    } else {
+        updateStatus("Ходит нолик")
+    }
 
     for (let i = 0; i < 3; i++) {
         for (let j = 0; j < 3; j++) {
             const cell = document.createElement("div");
             cell.className = "cell";
-            cell.innerText = field[i][j];
-            cell.addEventListener("click", () => onCellClick(i, j)); // Добавляем обработчик клика
+            cell.dataset.value = field[i][j];
+            cell.dataset.col = j;
+            cell.dataset.row = i;
+            cell.addEventListener("click", () => onCellClick(i, j));
             fieldElement.appendChild(cell);
         }
     }
 }
 
+let turn = "x";
+let gameEnd = false;
+
 updateFieldUI();
 
-let turn = "x";
-
 function onCellClick(y, x) {
+    if (gameEnd) return;
     if (field[y][x] !== "-") {
         console.log("Тут уже занято");
         return;
     }
 
     field[y][x] = turn;
+    turn = (turn === 'x') ? 'o' : 'x';
+
     updateFieldUI();
 
     let result = checkWin();
     if (result) {
         if (result === "tie") {
-            console.log("Ничья, попробуйте еще раз");
+            updateStatus("Ничья, попробуйте еще раз");
         } else {
             if (result === "x") {
-                console.log("Поздравляем! Победил крестик");
+                updateStatus("Поздравляем! Победил крестик");
             } else {
-                console.log("Поздравляем! Победил нолик");
+                updateStatus("Поздравляем! Победил нолик");
             }
         }
+        gameEnd = true;
         return;
     }
-
-    turn = (turn === 'x') ? 'o' : 'x';
 }
+
+const restartButton = document.getElementById("btn-restart")
+restartButton.addEventListener("click", () => {
+    gameEnd = false;
+    resetField();
+    turn = 'x';
+    updateFieldUI();
+})

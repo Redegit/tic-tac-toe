@@ -1,16 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Крестики-нолики</title>
     <link href="style.css" rel="stylesheet">
+    <link rel="preload" href="./fonts/Gagarin.ttf" as="font">
 </head>
-<body>
-    <div id="field" class="field">
 
-    </div>
+<body>
+    <header>
+        <div class="title">Крестики-нолики</div>
+        <button id="btn-restart" class="button btn-restart">Заново</button>
+    </header>
+
+    <main class="container">
+        <div id="status" class="status">Ходит крестик</div>
+        <div id="field" class="field"></div>
+    </main>
+
+    <footer>
+        Создано учениками группы ПИ21-2, Дмитрием Преснухиным и Никитой Арясиным
+    </footer>
 </body>
 
-<script src="script.js"> </script>   
+<script src="script.js"> </script>
+
 </html>
