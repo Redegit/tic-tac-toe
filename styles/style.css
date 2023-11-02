@@ -2,7 +2,7 @@
     font-family: "Crewniverse";
     font-style: normal;
     font-weight: 500;
-    src: url("./fonts/crewniverse_font_V6_0.ttf") format("truetype")
+    src: url("/styles/fonts/crewniverse_font_V6_0.ttf") format("truetype")
 }
 
 * {
@@ -35,7 +35,20 @@
             var(--neon-5),
             var(--neon-6),
             var(--neon-7));
-    ;
+    --gradient-conic: conic-gradient(from -135deg,
+            var(--neon-1),
+            var(--neon-2),
+            var(--neon-3),
+            var(--neon-4),
+            var(--neon-5),
+            var(--neon-6),
+            var(--neon-7),
+            var(--neon-6),
+            var(--neon-5),
+            var(--neon-4),
+            var(--neon-3),
+            var(--neon-2),
+            var(--neon-1));
 }
 
 html {
@@ -186,35 +199,16 @@ footer {
 
 .cell::after,
 .cell::before {
-    width: 70%;
     position: absolute;
     height: .5rem;
     background-color: red;
     border-radius: .5rem;
+    display: inline-block;
 }
 
-/* .cell:nth-child(1) { */
-/* border-radius: 50% 0 0 0; */
-/* } */
-/*  */
-/* .cell:nth-child(3) { */
-/* border-radius: 0 50% 0 0; */
-/* } */
-/*  */
-/* .cell:nth-child(7) { */
-/* border-radius: 0 0 0 50%; */
-/* } */
-/*  */
-/* .cell:nth-child(9) { */
-/* border-radius: 0 0 50% 0; */
-/* } */
-
-.cell[data-value="-"] {
-    cursor: pointer;
-}
-
-.cell[data-value="-"]:hover {
+#root[data-game-end="false"] .cell[data-value="-"]:hover {
     opacity: 0.6;
+    cursor: pointer;
 }
 
 .cell::after {
@@ -242,44 +236,80 @@ footer {
 .cell[data-value="x"]::after {
     content: "";
     rotate: 45deg;
+    animation: x_appearance .3s ease forwards;
 }
 
 .cell[data-value="x"]::before {
     content: "";
     rotate: -45deg;
+    animation: x_appearance .3s ease forwards;
+}
+
+@keyframes x_appearance {
+    from {
+        width: 0;
+    }
+
+    to {
+        width: 70%;
+    }
 }
 
 .cell[data-value="o"]::after {
+    background: var(--gradient-conic);
     content: "";
     width: 60%;
     height: 60%;
     border-radius: 50%;
     z-index: 1;
-    rotate: 45deg;
+    animation: o_appearance .3s ease forwards;
 }
 
 .cell[data-value="o"]::before {
     content: "";
-    width: 50%;
-    height: 50%;
+    width: calc(60% - 1rem);
+    height: calc(60% - 1rem);
     border-radius: 50%;
     background: var(--clr-bg);
     z-index: 2;
+    animation: o_appearance .3s ease forwards;
+}
+
+@keyframes o_appearance {
+    from {
+        scale: 0;
+    }
+
+    to {
+        scale: 1;
+    }
 }
 
 .line {
     --height: 1rem;
     position: absolute;
     transform-origin: left;
-    width: var(--width);
     height: var(--height);
     background: var(--gradient-45);
+    background-size: 200% 200%;
     border-radius: calc(var(--height) / 2);
     top: calc(var(--top) - var(--height) / 2);
     left: var(--left);
     box-shadow: 2px 2px 10px #00000069;
+    animation:
+        line_appearance .5s ease forwards,
+        gradient_anim 5s infinite;
 }
 
+@keyframes line_appearance {
+    from {
+        width: 0;
+    }
+
+    to {
+        width: var(--width);
+    }
+}
 
 @media (max-width: 500px) {
     :root {
@@ -290,5 +320,70 @@ footer {
 @media (max-width: 355px) {
     :root {
         font-size: 8px;
+    }
+}
+
+#root[data-game-end="true"] .status,
+#root[data-game-end="true"] .field,
+#root[data-game-end="true"] .btn-restart,
+#root[data-game-end="true"] .title {
+    background-size: 200% 200%;
+    animation: gradient_anim 5s infinite;
+}
+
+#root[data-game-end="true"] .cell[data-value="o"]::after {
+    animation: o_symbol_gradient_anim 10s linear infinite;
+}
+
+#root[data-game-end="true"] .cell[data-value="x"]::after,
+#root[data-game-end="true"] .cell[data-value="x"]::before {
+    animation: x_appearance .3s ease forwards,
+        x_symbol_gradient_anim 4s linear infinite;
+}
+
+@keyframes gradient_anim {
+    0% {
+        background-position: 0% 0%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 0%;
+    }
+}
+
+@keyframes o_symbol_gradient_anim {
+    0% {
+        background-size: 100% 100%;
+        rotate: 0;
+    }
+
+    50% {
+        background-size: 150% 150%;
+    }
+
+    100% {
+        background-size: 100% 100%;
+        rotate: 360deg;
+    }
+}
+
+@keyframes x_symbol_gradient_anim {
+    0% {
+        background-size: 150% 150%;
+        background-position: 0% 0%;
+    }
+
+    50% {
+        background-size: 200% 200%;
+        background-position: 100% 100%;
+    }
+
+    100% {
+        background-size: 150% 150%;
+        background-position: 0% 0%;
     }
 }

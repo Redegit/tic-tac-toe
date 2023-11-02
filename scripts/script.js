@@ -119,6 +119,11 @@ let turn = "x";
 // Флаг, указывающий на завершение игры
 let gameEnd = false;
 
+function setGameEndedData(status) {
+    const root = document.getElementById("root");
+    root.dataset.gameEnd = status;
+}
+
 // Функция, вызываемая при клике на ячейку
 function onCellClick(y, x) {
     if (gameEnd) { startNewGame(); return; } // Если игра завершена, игрок не может делать ход
@@ -147,8 +152,9 @@ function onCellClick(y, x) {
 
     function gameResult(status) {
         gameEnd = true;
-        updateStatus(status)
-        drawLine(result)
+        updateStatus(status);
+        drawLine(result);
+        setGameEndedData(true);
     }
 
     switch (result.winner) {
@@ -186,8 +192,8 @@ function drawLine({ dim, index }) {
                 y_shift -= line_padding / 2 / Math.sqrt(2);
                 break;
             case "135deg":
-                x_shift += line_padding / 2 - Math.sqrt(2);
-                y_shift -= line_padding / 2 - Math.sqrt(2);
+                x_shift += line_padding / 2 / Math.sqrt(2);
+                y_shift -= line_padding / 2 / Math.sqrt(2);
                 break;
         }
 
@@ -257,8 +263,11 @@ function startNewGame() {
     Cell.resetGameField();
     turn = 'x';
     updateStatus("Ходит крестик");
+    setGameEndedData(false);
 }
 // Обработчик события для кнопки перезапуска игры
 restartButton.addEventListener("click", () => {
     startNewGame();
 });
+
+startNewGame();
