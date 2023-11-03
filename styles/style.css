@@ -119,14 +119,14 @@ button {
 
 header {
     position: sticky;
-    height: 3rem;
+    /* height: 3rem; */
     display: flex;
     flex-direction: row;
     width: 100%;
     align-items: center;
     justify-content: space-between;
     box-shadow: 0 1px 7px 0px #00000033;
-    padding: 2rem;
+    padding: 1em;
     z-index: 1;
 }
 
@@ -178,11 +178,12 @@ footer {
 .field {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-gap: 5px;
+    grid-gap: .5rem;
     background: var(--gradient-45);
     max-height: min(50%, 90svw);
     aspect-ratio: 1;
     flex: 1;
+    z-index: 100;
 }
 
 .cell {
@@ -311,18 +312,6 @@ footer {
     }
 }
 
-@media (max-width: 500px) {
-    :root {
-        font-size: 12px;
-    }
-}
-
-@media (max-width: 355px) {
-    :root {
-        font-size: 8px;
-    }
-}
-
 #root[data-game-end="true"] .status,
 #root[data-game-end="true"] .field,
 #root[data-game-end="true"] .btn-restart,
@@ -385,5 +374,81 @@ footer {
     100% {
         background-size: 150% 150%;
         background-position: 0% 0%;
+    }
+}
+
+
+@media (max-width: 500px) {
+    :root {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 355px) {
+    :root {
+        font-size: 8px;
+    }
+}
+
+@media screen and (max-height:450px) {
+    :root {
+        font-size: 8px;
+    }
+
+    header {
+        box-shadow: none;
+        padding: 0;
+    }
+
+    header .title {
+        padding: 1em;
+    }
+
+    header .btn-restart {
+        margin: 1em;
+        font-size: 2rem;
+        border-radius: 100%;
+        padding: .5rem;
+        aspect-ratio: 1;
+    }
+
+    header .btn-restart::after,
+    header .btn-restart::before {
+        border-radius: 100%;
+    }
+
+    footer {
+        display: none;
+    }
+
+    .status {
+        font-size: 2.5rem;
+    }
+
+    .container {
+        gap: 0rem;
+    }
+
+    .field {
+        max-height: 70%;
+    }
+}
+
+@media screen and (max-height:250px) {
+    .container {
+        flex-direction: row;
+        max-height: 100%;
+        gap: 2rem;
+    }
+
+    .status {
+        font-size: 1rem;
+        writing-mode: vertical-lr;
+        text-orientation: upright;
+        height: auto;
+    }
+
+    .field {
+        max-width: 80svh;
     }
 }
