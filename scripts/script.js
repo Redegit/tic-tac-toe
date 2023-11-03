@@ -126,7 +126,7 @@ function setGameEndedData(status) {
 
 // Функция, вызываемая при клике на ячейку
 function onCellClick(y, x) {
-    if (gameEnd) { startNewGame(); return; } // Если игра завершена, игрок не может делать ход
+    if (gameEnd) { return; } // Если игра завершена, игрок не может делать ход
     if (field[y][x] !== "-") {
         return;
     }
@@ -265,9 +265,16 @@ function startNewGame() {
     updateStatus("Ходит крестик");
     setGameEndedData(false);
 }
+
 // Обработчик события для кнопки перезапуска игры
 restartButton.addEventListener("click", () => {
     startNewGame();
+});
+
+const fieldElement = document.getElementById("field");
+// Перезапуск игры по нажатию на игровое поле, если игра завершена
+fieldElement.addEventListener("mousedown", () => {
+    if (gameEnd) startNewGame();
 });
 
 startNewGame();
