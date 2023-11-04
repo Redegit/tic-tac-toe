@@ -178,12 +178,14 @@ footer {
 .field {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-gap: .5rem;
+    --gap: .5rem;
+    grid-gap: var(--gap);
     background: var(--gradient-45);
     max-height: min(50%, 90svw);
     aspect-ratio: 1;
     flex: 1;
     z-index: 100;
+    position: relative;
 }
 
 .cell {
