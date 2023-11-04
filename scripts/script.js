@@ -1,3 +1,110 @@
+// Инициализация игрового поля
+let field = [
+    ["-", "-", "-"],
+    ["-", "-", "-"],
+    ["-", "-", "-"]
+];
+
+// Функция сброса игрового поля
+function resetField() {
+    field = [
+        ["-", "-", "-"],
+        ["-", "-", "-"],
+        ["-", "-", "-"]
+    ];
+}
+
+// Получение элемента для отображения статуса игры
+const statusElement = document.getElementById("status");
+
+// Функция для обновления статуса игры
+function updateStatus(text) {
+    statusElement.textContent = text;
+}
+
+// Скрытие поля и кнопки перезапуска до начала игры
+document.getElementById("field").style.display = "none";
+document.getElementById("btn-restart").style.display = "none";
+updateStatus("");
+
+// Функция для обновления статуса игры с использованием имен игроков
+function updateStatusWithNames(playerSymbol, player1Name, player2Name) {
+    const playerName = playerSymbol === 'x' ? player1Name : player2Name;
+    updateStatus(`Ходит ${playerName}`);
+}
+
+// Обработчик клика по кнопке "Начать игру"
+document.getElementById("start-button").addEventListener("click", () => {
+    const player1Name = document.getElementById("player1").value;
+    const player2Name = document.getElementById("player2").value;
+
+    if (player1Name && player2Name) {
+        game.player1Name = player1Name;
+        game.player2Name = player2Name;
+
+        document.getElementById("field").style.display = "grid";
+        document.getElementById("btn-restart").style.display = "block";
+        // Старт новой игры
+        startNewGame(); // Вызывается после сохранения имен в объект game
+    } else {
+        alert("Пожалуйста, введите имена обоих игроков.");
+    }
+});
+
+// Инициализация текущего игрока (крестик начинает)
+let turn = "x";
+
+// Объект для хранения имен игроков и состояния игры
+const game = {
+    player1Name: "",
+    player2Name: "",
+    gameEnd: false
+};
+
+// Функция начала новой игры
+function startNewGame() {
+    resetField();
+    Cell.resetGameField();
+    turn = 'x';
+    game.gameEnd = false;
+    updateStatusWithNames(turn, game.player1Name, game.player2Name);
+}
+
+// Переопределение функции onCellClick для обновления статуса игры с именами игроков
+function onCellClick(row, col) {
+    if (gameEnd || field[row][col] !== "-") return;
+    
+    field[row][col] = turn;
+    Cell.findByCoord(row, col).element.dataset.value = turn;
+    
+    let result = checkWin();
+    if (result.winner) {
+        endGame(result);
+    } else {
+        turn = turn === 'x' ? 'o' : 'x';
+        updateStatusWithNames(turn, game.player1Name, game.player2Name);
+    }
+}
+
+// Функция для обработки окончания игры
+function endGame(result) {
+    game.gameEnd = true;
+    let statusMessage = "";
+    if (result.winner === "tie") {
+        statusMessage = "Ничья, попробуйте еще раз";
+    } else {
+        const winnerName = result.winner === 'x' ? game.player1Name : game.player2Name;
+        statusMessage = `Поздравляем! Победил ${winnerName}`;
+    }
+    updateStatus(statusMessage);
+    drawLine(result);
+}
+
+// Обработчик события для кнопки перезапуска игры
+document.getElementById("btn-restart").addEventListener("click", () => {
+    startNewGame();
+});
+
 class Cell {
     static cellList = [];
 
@@ -87,34 +194,12 @@ function checkWin() {
     return { winner: null };
 }
 
-// Инициализация игрового поля
-let field = [
-    ["-", "-", "-"],
-    ["-", "-", "-"],
-    ["-", "-", "-"]
-];
-
-// Функция сброса игрового поля
-function resetField() {
-    field = [
-        ["-", "-", "-"],
-        ["-", "-", "-"],
-        ["-", "-", "-"]
-    ];
-}
-
-// Получение элемента для отображения статуса игры
-const statusElement = document.getElementById("status");
-
 // Функция для обновления статуса игры
 function updateStatus(text) {
     statusElement.textContent = text;
 }
 
 Cell.createGameField();
-
-// Инициализация текущего игрока (крестик начинает)
-let turn = "x";
 
 // Флаг, указывающий на завершение игры
 let gameEnd = false;
@@ -124,53 +209,53 @@ function setGameEndedData(status) {
     root.dataset.gameEnd = status;
 }
 
-// Функция, вызываемая при клике на ячейку
-function onCellClick(y, x) {
-    if (gameEnd) { return; } // Если игра завершена, игрок не может делать ход
-    if (field[y][x] !== "-") {
-        return;
-    }
+// // Функция, вызываемая при клике на ячейку
+// function onCellClick(y, x) {
+//     if (gameEnd) { return; } // Если игра завершена, игрок не может делать ход
+//     if (field[y][x] !== "-") {
+//         return;
+//     }
 
-    // Устанавливаем значение в выбранную ячейку (ход текущего игрока)
-    field[y][x] = turn;
+//     // Устанавливаем значение в выбранную ячейку (ход текущего игрока)
+//     field[y][x] = turn;
 
-    // Обновление ячейки
-    Cell.findByCoord(y, x).element.dataset.value = turn;
+//     // Обновление ячейки
+//     Cell.findByCoord(y, x).element.dataset.value = turn;
 
-    // Смена текущего игрока
-    turn = (turn === 'x') ? 'o' : 'x';
+//     // Смена текущего игрока
+//     turn = (turn === 'x') ? 'o' : 'x';
 
-    // Обновление статуса
-    if (turn === 'x') {
-        updateStatus("Ходит крестик");
-    } else {
-        updateStatus("Ходит нолик");
-    }
+//     // Обновление статуса
+//     if (turn === 'x') {
+//         updateStatus("Ходит крестик");
+//     } else {
+//         updateStatus("Ходит нолик");
+//     }
 
-    // Проверка, завершена ли игра
-    let result = checkWin();
+//     // Проверка, завершена ли игра
+//     let result = checkWin();
 
-    function gameResult(status) {
-        gameEnd = true;
-        updateStatus(status);
-        drawLine(result);
-        setGameEndedData(true);
-    }
+//     function gameResult(status) {
+//         gameEnd = true;
+//         updateStatus(status);
+//         drawLine(result);
+//         setGameEndedData(true);
+//     }
 
-    switch (result.winner) {
-        case "tie":
-            gameResult("Ничья, попробуйте еще раз");
-            break;
-        case "x":
-            gameResult("Поздравляем! Победил крестик");
-            break;
-        case "o":
-            gameResult("Поздравляем! Победил нолик");
-            break;
-        case null: break;
-        default: break;
-    }
-}
+//     switch (result.winner) {
+//         case "tie":
+//             gameResult("Ничья, попробуйте еще раз");
+//             break;
+//         case "x":
+//             gameResult("Поздравляем! Победил крестик");
+//             break;
+//         case "o":
+//             gameResult("Поздравляем! Победил нолик");
+//             break;
+//         case null: break;
+//         default: break;
+//     }
+// }
 
 function drawLine({ dim, index }) {
     function createLine(col_i, row_i, rotation_deg) {
@@ -260,7 +345,7 @@ function startNewGame() {
     resetField();
     Cell.resetGameField();
     turn = 'x';
-    updateStatus("Ходит крестик");
+    updateStatusWithNames(turn, game.player1Name, game.player2Name);
     setGameEndedData(false);
 }
 
