@@ -173,80 +173,78 @@ function onCellClick(y, x) {
 }
 
 function drawLine({ dim, index }) {
-    function createLine(cell1, cell2, rotation_deg) {
+    function createLine(col_i, row_i, rotation_deg) {
         const line = document.createElement("line");
 
         line.className = "line";
 
         line_padding = 3; // in rem
+        line_width = 0;
         x_shift = y_shift = 0;
         switch (rotation_deg) {
             case "90deg":
                 y_shift -= line_padding / 2;
+                line_width = `calc((100% + var(--gap)) / 3 * 2 + ${line_padding}rem)`
                 break;
             case "0deg":
                 x_shift -= line_padding / 2;
+                line_width = `calc((100% + var(--gap)) / 3 * 2 + ${line_padding}rem)`
                 break;
             case "45deg":
                 x_shift -= line_padding / 2 / Math.sqrt(2);
                 y_shift -= line_padding / 2 / Math.sqrt(2);
+                line_width = `calc((100% + var(--gap)) / 3 * 2 * ${Math.sqrt(2)} + ${line_padding}rem)`
                 break;
             case "135deg":
                 x_shift += line_padding / 2 / Math.sqrt(2);
                 y_shift -= line_padding / 2 / Math.sqrt(2);
+                line_width = `calc((100% + var(--gap)) / 3 * 2 * ${Math.sqrt(2)} + ${line_padding}rem)`
                 break;
         }
 
-        cell1_center = getCellCenter(cell1.element);
-        cell2_center = getCellCenter(cell2.element);
+        let x_1 = getPosFromIndex(col_i);
+        let y_1 = getPosFromIndex(row_i);
 
-        x_dif = cell1_center.center_x - cell2_center.center_x
-        y_dif = cell1_center.center_y - cell2_center.center_y
-        line_width = Math.sqrt(x_dif ** 2 + y_dif ** 2)
+        function getPosFromIndex(index) {
+            switch (index % 3) {
+                // --gap - кастомный атрибут класса .field, использующийся для grid-gap 
+               case 0: return `calc((100% - 2 * var(--gap)) / 6 )`;
+               case 1: return `50%`;
+               case 2: return `calc((500% + 2 * var(--gap)) / 6)`;
+           }
+        }
 
         line.style.cssText = `
-            --width: calc(${line_width}px + ${line_padding}rem); 
-            --left: calc(${cell1_center.center_x}px + ${x_shift}rem); 
-            --top: calc(${cell1_center.center_y}px + ${y_shift}rem);
+            --width: ${line_width}; 
+            --left: calc(${x_1} + ${x_shift}rem); 
+            --top: calc(${y_1} + ${y_shift}rem);
             rotate: ${rotation_deg}`
         const field = document.getElementById("field");
         field.appendChild(line);
     }
 
-    function getCellCenter(cell) {
-        console.log(cell.getBoundingClientRect());
-        let { x, y, height, width } = cell.getBoundingClientRect();
-        center_x = x + width / 2;
-        center_y = y + height / 2;
-        return { center_x, center_y }
-    }
-
     switch (dim) {
         case "col":
             createLine(
-                Cell.findByCoord(0, index),
-                Cell.findByCoord(2, index),
+                index, 0, 
                 "90deg"
             );
             break;
         case "row":
             createLine(
-                Cell.findByCoord(index, 0),
-                Cell.findByCoord(index, 2),
+                0, index, 
                 "0deg"
             );
             break;
         case "diag":
             if (index === 0) {
                 createLine(
-                    Cell.findByCoord(0, 0),
-                    Cell.findByCoord(2, 2),
+                    0, 0,
                     "45deg"
                 );
             } else {
                 createLine(
-                    Cell.findByCoord(0, 2),
-                    Cell.findByCoord(2, 0),
+                    2, 0, 
                     "135deg"
                 );
             }
@@ -273,8 +271,8 @@ restartButton.addEventListener("click", () => {
 
 const fieldElement = document.getElementById("field");
 // Перезапуск игры по нажатию на игровое поле, если игра завершена
-fieldElement.addEventListener("mousedown", () => {
-    if (gameEnd) startNewGame();
+fieldElement.addEventListener("mousedown", (e) => {
+    if (gameEnd && e.button === 0) startNewGame();
 });
 
 startNewGame();
