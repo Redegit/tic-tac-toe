@@ -39,17 +39,25 @@ document.getElementById("start-button").addEventListener("click", () => {
     const player2Name = document.getElementById("player2").value;
 
     if (player1Name && player2Name) {
+        // Сохранение имен игроков
         game.player1Name = player1Name;
         game.player2Name = player2Name;
-
+        
+        // Скрытие формы ввода имен
+        document.getElementById("player-names").style.display = "none";
+        
+        // Показ игрового поля и кнопки перезапуска
         document.getElementById("field").style.display = "grid";
         document.getElementById("btn-restart").style.display = "block";
-        // Старт новой игры
-        startNewGame(); // Вызывается после сохранения имен в объект game
+        
+        // Обновление статуса и начало новой игры
+        updateStatusWithNames('x', player1Name, player2Name);
+        startNewGame();
     } else {
         alert("Пожалуйста, введите имена обоих игроков.");
     }
 });
+
 
 // Инициализация текущего игрока (крестик начинает)
 let turn = "x";
