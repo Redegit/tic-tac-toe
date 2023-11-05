@@ -42,14 +42,17 @@ document.getElementById("start-button").addEventListener("click", () => {
         // Сохранение имен игроков
         game.player1Name = player1Name;
         game.player2Name = player2Name;
-        
+
         // Скрытие формы ввода имен
         document.getElementById("player-names").style.display = "none";
-        
+
         // Показ игрового поля и кнопки перезапуска
         document.getElementById("field").style.display = "grid";
         document.getElementById("btn-restart").style.display = "block";
-        
+
+        // Показ статуса игры
+        document.getElementById("status").style.display = "block";
+
         // Обновление статуса и начало новой игры
         updateStatusWithNames('x', player1Name, player2Name);
         startNewGame();
@@ -57,6 +60,7 @@ document.getElementById("start-button").addEventListener("click", () => {
         alert("Пожалуйста, введите имена обоих игроков.");
     }
 });
+
 
 
 // Инициализация текущего игрока (крестик начинает)

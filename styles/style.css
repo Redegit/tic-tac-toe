@@ -211,6 +211,7 @@ footer {
 }
 
 .status {
+    display: none;
     font-size: 2rem;
     background: var(--gradient-45);
     background-clip: text;
