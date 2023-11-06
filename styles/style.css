@@ -1,3 +1,49 @@
+.player-names {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.player-label {
+    font-size: 1.5rem;
+    color: var(--clr-font);
+    background: var(--gradient-20);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.player-input {
+    font-size: 1.2rem;
+    border: 2px solid var(--neon-5);
+    border-radius: .5rem;
+    padding: .5rem 1rem;
+    outline: none;
+    text-align: center;
+}
+
+.player-input:focus {
+    border-color: var(--neon-1);
+}
+
+.button.btn-start {
+    padding: 1rem 2rem;
+    font-size: 1.5rem;
+    border: none;
+    border-radius: .5rem;
+    cursor: pointer;
+    background: var(--gradient-45);
+    color: var(--clr-bg);
+    transition: background-color 0.2s ease;
+}
+
+.button.btn-start:hover {
+    background-color: var(--neon-3);
+}
+
 @font-face {
     font-family: "Crewniverse";
     font-style: normal;
@@ -165,6 +211,7 @@ footer {
 }
 
 .status {
+    display: none;
     font-size: 2rem;
     background: var(--gradient-45);
     background-clip: text;
