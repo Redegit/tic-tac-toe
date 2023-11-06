@@ -23,13 +23,65 @@
     padding: .5rem 1rem;
     outline: none;
     text-align: center;
+    font-family: inherit;
+    color: var(--clr-font);
 }
 
 .player-input:focus {
-    border-color: var(--neon-1);
+    outline: none;
+    border: 2px solid rgb(172, 172, 245);
+    box-shadow: 0 0 10px rgb(108, 145, 159);
 }
 
-.button.btn-start {
+.button-style {
+    background-color: var(--clr-bg);
+    position: relative;
+    border: none;
+    padding: .5rem;
+    padding-top: .8rem;
+    font-size: 1.1em;
+    border-radius: .5rem;
+    cursor: pointer;
+    background: var(--gradient-20);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+
+.button-style::after {
+    content: "";
+    position: absolute;
+    background: var(--gradient-20);
+    inset: -.2em;
+    border-radius: .6rem;
+    z-index: -2;
+    filter: blur(.1em);
+    transition: filter .2s;
+}
+
+.button-style:hover,
+.button-style:focus-visible {
+    outline: none;
+}
+
+.button-style:hover::after,
+.button-style:focus-visible::after {
+    filter: blur(.3em);
+}
+
+.button-style::before {
+    content: "";
+    position: absolute;
+    border-radius: .6rem;
+    background: var(--clr-bg);
+    inset: -2px;
+    z-index: -1;
+}
+
+/* .button.btn-start {
     padding: 1rem 2rem;
     font-size: 1.5rem;
     border: none;
@@ -38,7 +90,7 @@
     background: var(--gradient-45);
     color: var(--clr-bg);
     transition: background-color 0.2s ease;
-}
+} */
 
 .button.btn-start:hover {
     background-color: var(--neon-3);
@@ -116,7 +168,7 @@ button {
     font-family: inherit;
 }
 
-.btn-restart {
+/* .btn-restart {
     background-color: var(--clr-bg);
     position: relative;
     border: none;
@@ -131,7 +183,7 @@ button {
     color: transparent;
     user-select: none;
     -webkit-tap-highlight-color: transparent;
-}
+} */
 
 .btn-restart::after {
     content: "";
