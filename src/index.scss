@@ -125,7 +125,7 @@ button {
 
 #page[data-game-end="true"] .status,
 #page[data-game-end="true"] .field,
-#page[data-game-end="true"] .btn-restart,
+#page[data-game-end="true"] .btn,
 #page[data-game-end="true"] .title {
     background-size: 200% 200%;
     animation: gradient_anim 5s infinite;
@@ -211,61 +211,58 @@ button {
         font-size: 8px;
     }
 
+    body {
+        bottom: -4rem;
+        // padding-bottom: 2rem !important;
+    }
+
     header {
-        padding: 0;
+        padding: 0 !important;
         box-shadow: none !important;
         background: none !important;
     }
 
     header .title {
-        padding: 1em;
+        padding: .5em !important;
     }
 
-    header .btn-restart {
-        margin: 1em;
-        font-size: 2rem;
-        border-radius: 100%;
-        padding: .5rem;
-        aspect-ratio: 1;
-    }
-
-    header .btn-restart::after,
-    header .btn-restart::before {
-        border-radius: 100%;
+    header .btn {
+        margin-right: 1em !important;
     }
 
     footer {
-        display: none;
+        display: none !important;
     }
 
     .status {
-        font-size: 2.5rem;
+        font-size: 2.5rem !important;
     }
 
     .container {
-        gap: 0rem;
+        gap: 1rem !important;
+        padding: 4rem 0 3rem 0 !important;
     }
 
     .field {
-        max-height: 70%;
+        max-height: 70% !important;
     }
 }
 
 @media screen and (max-height:250px) {
     .container {
         flex-direction: row;
-        max-height: 100%;
-        gap: 2rem;
+        max-height: 100% !important;
+        gap: 2rem !important;
     }
 
     .status {
-        font-size: 1rem;
-        writing-mode: vertical-lr;
-        text-orientation: upright;
-        height: auto;
+        font-size: 1rem !important; 
+        writing-mode: vertical-lr !important;
+        text-orientation: upright !important;
+        height: auto !important;
     }
 
     .field {
-        max-width: 80svh;
+        max-width: 80svh !important;
     }
 }
