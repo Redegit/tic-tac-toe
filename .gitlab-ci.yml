@@ -4,6 +4,7 @@ image: node:14
 before_script: []
 pages:
   script:
+    - export CI=false
     - npm install
     - npm run build
   artifacts:
