@@ -1,0 +1,264 @@
+@font-face {
+  font-family: "Crewniverse";
+  font-style: normal;
+  font-weight: 500;
+  src: url("./assets/fonts/crewniverse_font_V6_0.ttf") format("truetype")
+}
+
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --clr-bg: #fafcff;
+  --clr-font: #010911;
+  --neon-1: #f72585;
+  --neon-2: #b5179e;
+  --neon-3: #7209b7;
+  --neon-4: #3f37c9;
+  --neon-5: #4361ee;
+  --neon-6: #4895ef;
+  --neon-7: #4cc9f0;
+  --gradient-20: linear-gradient(20deg,
+          var(--neon-1),
+          var(--neon-2),
+          var(--neon-3),
+          var(--neon-4),
+          var(--neon-5),
+          var(--neon-6),
+          var(--neon-7));
+  --gradient-45: linear-gradient(45deg,
+          var(--neon-1),
+          var(--neon-2),
+          var(--neon-3),
+          var(--neon-4),
+          var(--neon-5),
+          var(--neon-6),
+          var(--neon-7));
+  --gradient-conic: conic-gradient(from -135deg,
+          var(--neon-1),
+          var(--neon-2),
+          var(--neon-3),
+          var(--neon-4),
+          var(--neon-5),
+          var(--neon-6),
+          var(--neon-7),
+          var(--neon-6),
+          var(--neon-5),
+          var(--neon-4),
+          var(--neon-3),
+          var(--neon-2),
+          var(--neon-1));
+}
+
+html {
+  height: 100svh;
+  width: 100svw;
+  overflow: auto;
+}
+
+body {
+  font-family: "Crewniverse", Verdana, Geneva, Tahoma, sans-serif;
+  color: var(--clr-font);
+  background-color: var(--clr-bg);
+  position: absolute;
+  inset: 0;
+  margin: 0;
+}
+
+button {
+  font-family: inherit;
+}
+
+.btn {
+  background-color: var(--clr-bg);
+  position: relative;
+  border: none;
+  padding: .5rem;
+  padding-top: .8rem;
+  font-size: 1.1em;
+  border-radius: .5rem;
+  cursor: pointer;
+  background: var(--gradient-20);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+
+.btn::after {
+  content: "";
+  position: absolute;
+  background: var(--gradient-20);
+  inset: -.2em;
+  border-radius: .6rem;
+  z-index: -2;
+  filter: blur(.1em);
+  transition: filter .2s;
+}
+
+.btn:hover,
+.btn:focus-visible {
+  outline: none;
+}
+
+.btn:hover::after,
+.btn:focus-visible::after {
+  filter: blur(.3em);
+}
+
+.btn::before {
+  content: "";
+  position: absolute;
+  border-radius: .6rem;
+  background: var(--clr-bg);
+  inset: -2px;
+  z-index: -1;
+}
+
+.button.btn-start:hover {
+  background-color: var(--neon-3);
+}
+
+#page[data-game-end="true"] .status,
+#page[data-game-end="true"] .field,
+#page[data-game-end="true"] .btn-restart,
+#page[data-game-end="true"] .title {
+    background-size: 200% 200%;
+    animation: gradient_anim 5s infinite;
+}
+
+#page[data-game-end="true"] .cell[data-value="o"]::after {
+    animation: o_symbol_gradient_anim 10s linear infinite;
+}
+
+#page[data-game-end="true"] .cell[data-value="x"]::after,
+#page[data-game-end="true"] .cell[data-value="x"]::before {
+    animation: x_appearance .3s ease forwards,
+        x_symbol_gradient_anim 4s linear infinite;
+}
+
+@keyframes gradient_anim {
+    0% {
+        background-position: 0% 0%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 0%;
+    }
+}
+
+@keyframes o_symbol_gradient_anim {
+    0% {
+        background-size: 100% 100%;
+        rotate: 0;
+    }
+
+    50% {
+        background-size: 150% 150%;
+    }
+
+    100% {
+        background-size: 100% 100%;
+        rotate: 360deg;
+    }
+}
+
+@keyframes x_symbol_gradient_anim {
+    0% {
+        background-size: 150% 150%;
+        background-position: 0% 0%;
+    }
+
+    50% {
+        background-size: 200% 200%;
+        background-position: 100% 100%;
+    }
+
+    100% {
+        background-size: 150% 150%;
+        background-position: 0% 0%;
+    }
+}
+
+
+@media (max-width: 500px) {
+    :root {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 355px) {
+    :root {
+        font-size: 8px;
+    }
+}
+
+@media screen and (max-height:450px) {
+    :root {
+        font-size: 8px;
+    }
+
+    header {
+        box-shadow: none;
+        padding: 0;
+    }
+
+    header .title {
+        padding: 1em;
+    }
+
+    header .btn-restart {
+        margin: 1em;
+        font-size: 2rem;
+        border-radius: 100%;
+        padding: .5rem;
+        aspect-ratio: 1;
+    }
+
+    header .btn-restart::after,
+    header .btn-restart::before {
+        border-radius: 100%;
+    }
+
+    footer {
+        display: none;
+    }
+
+    .status {
+        font-size: 2.5rem;
+    }
+
+    .container {
+        gap: 0rem;
+    }
+
+    .field {
+        max-height: 70%;
+    }
+}
+
+@media screen and (max-height:250px) {
+    .container {
+        flex-direction: row;
+        max-height: 100%;
+        gap: 2rem;
+    }
+
+    .status {
+        font-size: 1rem;
+        writing-mode: vertical-lr;
+        text-orientation: upright;
+        height: auto;
+    }
+
+    .field {
+        max-width: 80svh;
+    }
+}

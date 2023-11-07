@@ -1,0 +1,99 @@
+.cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 1;
+    position: relative;
+    isolation: isolate;
+    background-color: var(--clr-bg);
+    -webkit-tap-highlight-color: transparent;
+    transition: opacity .5s ease-out;
+}
+
+.cell::after,
+.cell::before {
+    position: absolute;
+    height: .5rem;
+    background-color: red;
+    border-radius: .5rem;
+    display: inline-block;
+}
+
+#page[data-game-end="false"] .cell[data-value="-"]:hover {
+    opacity: 0.6;
+    cursor: pointer;
+}
+
+.cell::after {
+    background: linear-gradient(20deg,
+            var(--neon-1),
+            var(--neon-2),
+            var(--neon-3),
+            var(--neon-4),
+            var(--neon-5),
+            var(--neon-6),
+            var(--neon-7));
+}
+
+.cell::before {
+    background: linear-gradient(90deg,
+            var(--neon-1),
+            var(--neon-2),
+            var(--neon-3),
+            var(--neon-4),
+            var(--neon-5),
+            var(--neon-6),
+            var(--neon-7));
+}
+
+.cell[data-value="x"]::after {
+    content: "";
+    rotate: 45deg;
+    animation: x_appearance .3s ease forwards;
+}
+
+.cell[data-value="x"]::before {
+    content: "";
+    rotate: -45deg;
+    animation: x_appearance .3s ease forwards;
+}
+
+@keyframes x_appearance {
+    from {
+        width: 0;
+    }
+
+    to {
+        width: 70%;
+    }
+}
+
+.cell[data-value="o"]::after {
+    background: var(--gradient-conic);
+    content: "";
+    width: 60%;
+    height: 60%;
+    border-radius: 50%;
+    z-index: 1;
+    animation: o_appearance .3s ease forwards;
+}
+
+.cell[data-value="o"]::before {
+    content: "";
+    width: calc(60% - 1rem);
+    height: calc(60% - 1rem);
+    border-radius: 50%;
+    background: var(--clr-bg);
+    z-index: 2;
+    animation: o_appearance .3s ease forwards;
+}
+
+@keyframes o_appearance {
+    from {
+        scale: 0;
+    }
+
+    to {
+        scale: 1;
+    }
+}

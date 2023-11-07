@@ -1,0 +1,24 @@
+header {
+    position: sticky;
+    /* height: 3rem; */
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 1px 7px 0px #00000033;
+    padding: 1em;
+    z-index: 1;
+}
+
+.title {
+    font-size: 2em;
+    color: transparent;
+    background: var(--gradient-45);
+    background: -webkit-var(--gradient-45);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    user-select: none;
+    padding-top: 0.3rem;
+}

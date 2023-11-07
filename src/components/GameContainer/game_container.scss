@@ -1,0 +1,21 @@
+.container {
+    position: absolute;
+    inset: 0;
+    padding: 5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.status {
+    font-size: 2rem;
+    background: var(--gradient-45);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    user-select: none;
+    text-align: center;
+    height: 2em;
+}

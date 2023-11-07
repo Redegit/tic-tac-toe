@@ -1,0 +1,38 @@
+.field {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    --gap: .5rem;
+    grid-gap: var(--gap);
+    background: var(--gradient-45);
+    max-height: min(50%, 90svw);
+    aspect-ratio: 1;
+    flex: 1;
+    z-index: 100;
+    position: relative;
+    transform-style: preserve-3d;
+    transform-origin: center;
+    transition: transform .5s;
+    --init-rotate-angle: 15deg;
+}
+
+#page[data-game-end="true"] {
+
+    .field:hover {
+        cursor: pointer;
+        transform: rotateX(var(--init-rotate-angle));
+    }
+
+    .field.active {
+        animation: field_anim 1s;
+    }
+}
+
+@keyframes field_anim {
+    from {
+        transform: rotateX(var(--init-rotate-angle));
+    }
+
+    to {
+        transform: rotateX(calc(360deg + var(--init-rotate-angle)));
+    }
+}

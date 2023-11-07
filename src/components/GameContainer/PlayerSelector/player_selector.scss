@@ -1,0 +1,38 @@
+.player-names {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.player-label {
+    font-size: 1.5rem;
+    color: var(--clr-font);
+    background: var(--gradient-20);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    user-select: none;
+}
+
+.player-input {
+    font-size: 1.2rem;
+    border: 2px solid var(--neon-5);
+    border-radius: .5rem;
+    padding: 1rem 1rem .6rem 1rem;
+    outline: none;
+    text-align: center;
+    font-family: inherit;
+    color: var(--clr-font);
+    transition: box-shadow .3s, border .3s;
+}
+
+.player-input:focus-visible,
+.player-input:hover {
+    outline: none;
+    border: 2px solid rgb(172, 172, 245);
+    box-shadow: 0 0 10px rgb(108, 145, 159);
+}
+
