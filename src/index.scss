@@ -85,6 +85,7 @@ button {
   color: transparent;
   user-select: none;
   -webkit-tap-highlight-color: transparent;
+  text-align: center;
 }
 
 
@@ -192,6 +193,11 @@ button {
     :root {
         font-size: 12px;
     }
+
+    header {
+        box-shadow: none !important;
+        background: none !important;
+    }
 }
 
 @media (max-width: 355px) {
@@ -206,9 +212,9 @@ button {
     }
 
     header {
-        box-shadow: none;
         padding: 0;
-        background: none;
+        box-shadow: none !important;
+        background: none !important;
     }
 
     header .title {
