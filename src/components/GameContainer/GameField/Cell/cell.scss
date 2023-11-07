@@ -19,9 +19,11 @@
     display: inline-block;
 }
 
-#page[data-game-end="false"] .cell[data-value="-"]:hover:not(:active) {
-    opacity: 0.6;
-    cursor: pointer;
+@media (hover: hover) {
+    #page[data-game-end="false"] .cell[data-value="-"]:hover {
+        opacity: 0.6;
+        cursor: pointer;
+    }
 }
 
 .cell::after {
