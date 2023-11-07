@@ -6,9 +6,63 @@ header {
     width: 100%;
     align-items: center;
     justify-content: space-between;
-    box-shadow: 0 1px 7px 0px #00000033;
     padding: 1em;
     z-index: 1;
+    box-shadow: 0 1px 7px 0px var(--neon-6);
+
+    .btn {
+        aspect-ratio: 1;
+        font-size: 2em;
+        border-radius: 100%;
+        display: flex;
+        padding: 0.2rem;
+
+        span {
+            padding-left: 0.2rem;
+        }
+    }
+
+    
+    // .btn::after {
+        // inset: -0.2rem;
+    // }
+
+
+    .btn::after,
+    .btn::before {
+        aspect-ratio: 1;
+        border-radius: 100%;
+    }
+}
+
+#page[data-game-end="true"] header {
+    animation: header-shadow 10s infinite;
+}
+
+@keyframes header-shadow {
+    0%,
+    100% {
+        box-shadow: 0 1px 7px 0px var(--neon-6);
+    }
+    10%,
+    90% {
+        box-shadow: 0 1px 7px 0px var(--neon-5);
+    }
+    20%,
+    80% {
+        box-shadow: 0 1px 7px 0px var(--neon-4);
+    }
+    30%, 
+    70% {
+        box-shadow: 0 1px 7px 0px var(--neon-3);
+    }
+    40%, 
+    60% {
+        box-shadow: 0 1px 7px 0px var(--neon-2);
+    }
+    50% {
+        box-shadow: 0 1px 7px 0px var(--neon-1);
+    }
 }
 
 .title {

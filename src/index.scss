@@ -1,126 +1,126 @@
 @font-face {
-  font-family: "Crewniverse";
-  font-style: normal;
-  font-weight: 500;
-  src: url("./assets/fonts/crewniverse_font_V6_0.ttf") format("truetype")
+    font-family: "Crewniverse";
+    font-style: normal;
+    font-weight: 500;
+    src: url("./assets/fonts/crewniverse_font_V6_0.ttf") format("truetype")
 }
 
 * {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 :root {
-  --clr-bg: #fafcff;
-  --clr-font: #010911;
-  --neon-1: #f72585;
-  --neon-2: #b5179e;
-  --neon-3: #7209b7;
-  --neon-4: #3f37c9;
-  --neon-5: #4361ee;
-  --neon-6: #4895ef;
-  --neon-7: #4cc9f0;
-  --gradient-20: linear-gradient(20deg,
-          var(--neon-1),
-          var(--neon-2),
-          var(--neon-3),
-          var(--neon-4),
-          var(--neon-5),
-          var(--neon-6),
-          var(--neon-7));
-  --gradient-45: linear-gradient(45deg,
-          var(--neon-1),
-          var(--neon-2),
-          var(--neon-3),
-          var(--neon-4),
-          var(--neon-5),
-          var(--neon-6),
-          var(--neon-7));
-  --gradient-conic: conic-gradient(from -135deg,
-          var(--neon-1),
-          var(--neon-2),
-          var(--neon-3),
-          var(--neon-4),
-          var(--neon-5),
-          var(--neon-6),
-          var(--neon-7),
-          var(--neon-6),
-          var(--neon-5),
-          var(--neon-4),
-          var(--neon-3),
-          var(--neon-2),
-          var(--neon-1));
+    --clr-bg: #fafcff;
+    --clr-font: #010911;
+    --neon-1: #f72585;
+    --neon-2: #b5179e;
+    --neon-3: #7209b7;
+    --neon-4: #3f37c9;
+    --neon-5: #4361ee;
+    --neon-6: #4895ef;
+    --neon-7: #4cc9f0;
+    --gradient-20: linear-gradient(20deg,
+            var(--neon-1),
+            var(--neon-2),
+            var(--neon-3),
+            var(--neon-4),
+            var(--neon-5),
+            var(--neon-6),
+            var(--neon-7));
+    --gradient-45: linear-gradient(45deg,
+            var(--neon-1),
+            var(--neon-2),
+            var(--neon-3),
+            var(--neon-4),
+            var(--neon-5),
+            var(--neon-6),
+            var(--neon-7));
+    --gradient-conic: conic-gradient(from -135deg,
+            var(--neon-1),
+            var(--neon-2),
+            var(--neon-3),
+            var(--neon-4),
+            var(--neon-5),
+            var(--neon-6),
+            var(--neon-7),
+            var(--neon-6),
+            var(--neon-5),
+            var(--neon-4),
+            var(--neon-3),
+            var(--neon-2),
+            var(--neon-1));
 }
 
 html {
-  height: 100svh;
-  width: 100svw;
-  overflow: auto;
+    height: 100svh;
+    width: 100svw;
+    overflow: auto;
 }
 
 body {
-  font-family: "Crewniverse", Verdana, Geneva, Tahoma, sans-serif;
-  color: var(--clr-font);
-  background-color: var(--clr-bg);
-  position: absolute;
-  inset: 0;
-  margin: 0;
+    font-family: "Crewniverse", Verdana, Geneva, Tahoma, sans-serif;
+    color: var(--clr-font);
+    background-color: var(--clr-bg);
+    position: absolute;
+    inset: 0;
+    margin: 0;
 }
 
 button {
-  font-family: inherit;
+    font-family: inherit;
 }
 
 .btn {
-  background-color: var(--clr-bg);
-  position: relative;
-  border: none;
-  padding: .5rem;
-  padding-top: .8rem;
-  font-size: 1.1em;
-  border-radius: .5rem;
-  cursor: pointer;
-  background: var(--gradient-20);
-  background-clip: text;
-  -webkit-background-clip: text;
-  color: transparent;
-  user-select: none;
-  -webkit-tap-highlight-color: transparent;
-  text-align: center;
+    background-color: var(--clr-bg);
+    position: relative;
+    border: none;
+    padding: .5rem;
+    padding-top: .8rem;
+    font-size: 1.1em;
+    border-radius: .5rem;
+    cursor: pointer;
+    background: var(--gradient-20);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    text-align: center;
 }
 
 
 .btn::after {
-  content: "";
-  position: absolute;
-  background: var(--gradient-20);
-  inset: -.2em;
-  border-radius: .6rem;
-  z-index: -2;
-  filter: blur(.1em);
-  transition: filter .2s;
+    content: "";
+    position: absolute;
+    background: var(--gradient-20);
+    inset: -.2em;
+    border-radius: .6rem;
+    z-index: -2;
+    filter: blur(.1em);
+    transition: filter .2s;
 }
 
 .btn:hover,
 .btn:focus-visible {
-  outline: none;
+    outline: none;
 }
 
 .btn:hover::after,
 .btn:focus-visible::after {
-  filter: blur(.3em);
+    filter: blur(.4rem) brightness(1.2);
 }
 
 .btn::before {
-  content: "";
-  position: absolute;
-  border-radius: .6rem;
-  background: var(--clr-bg);
-  inset: -2px;
-  z-index: -1;
+    content: "";
+    position: absolute;
+    border-radius: .6rem;
+    background: var(--clr-bg);
+    inset: -2px;
+    z-index: -1;
 }
 
 .button.btn-start:hover {
-  background-color: var(--neon-3);
+    background-color: var(--neon-3);
 }
 
 #page[data-game-end="true"] .status,
@@ -206,7 +206,7 @@ button {
     }
 }
 
-@media screen and (max-height:450px) {
+@media screen and (max-height:700px) {
     :root {
         font-size: 8px;
     }
@@ -217,17 +217,18 @@ button {
     }
 
     header {
-        padding: 0 !important;
+        padding: 1rem 1rem 0 1rem !important;
         box-shadow: none !important;
         background: none !important;
-    }
 
-    header .title {
-        padding: .5em !important;
-    }
+        .btn {
+            // font-size: 2rem !important;
+        }
 
-    header .btn {
-        margin-right: 1em !important;
+        .title {
+            padding: .5em !important;
+        }
+
     }
 
     footer {
@@ -241,6 +242,10 @@ button {
     .container {
         gap: 1rem !important;
         padding: 4rem 0 3rem 0 !important;
+
+        .btn {
+            font-size: 2rem;
+        }
     }
 
     .field {
@@ -250,13 +255,13 @@ button {
 
 @media screen and (max-height:250px) {
     .container {
-        flex-direction: row;
+        flex-direction: row-reverse !important;
         max-height: 100% !important;
-        gap: 2rem !important;
+        gap: 5rem !important;
     }
 
     .status {
-        font-size: 1rem !important; 
+        font-size: 1.5rem !important;
         writing-mode: vertical-lr !important;
         text-orientation: upright !important;
         height: auto !important;
