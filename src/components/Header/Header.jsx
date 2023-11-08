@@ -14,7 +14,7 @@ export const Header = () => {
     return (
         <header>
             <div className={"title"}>{"Крестики-нолики"}</div>
-            <div onClick={changePlayers} className="btn"><span>👤</span></div>
+            <div onClick={changePlayers} className="btn"><span>👵</span></div>
         </header>
     );
 }
