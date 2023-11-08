@@ -26,6 +26,7 @@ export const GameProvider = ({ children }) => {
         setCurrentPlayer(getInitialPlayer())
         setGameGoing(true);
         setGameOpened(true);
+        setTurn("x");
     };
 
     const toggleCurrentPlayer = () => {

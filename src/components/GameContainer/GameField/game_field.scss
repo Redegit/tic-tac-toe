@@ -12,29 +12,36 @@
     transform-style: preserve-3d;
     transform-origin: center;
     transition: transform .5s;
-    --init-rotate-angle: 0deg;
+    // --init-rotate-angle: 0deg;
     -webkit-tap-highlight-color: transparent;
     box-shadow: 0 0 0px 1px inset var(--clr-bg);
+    animation: field_appearance .5s;
+}
+
+@keyframes field_appearance {
+    from {opacity: 0;}
+    to {opacity: 1;}
 }
 
 #page[data-game-end="true"] {
 
     .field:hover {
         cursor: pointer;
-        transform: rotateX(var(--init-rotate-angle));
+        // transform: rotateX(var(--init-rotate-angle));
     }
 
     .field.active {
-        animation: field_anim 1s;
+        animation: field_anim .5s forwards;
     }
 }
 
 @keyframes field_anim {
     from {
-        transform: rotateX(var(--init-rotate-angle));
+        opacity: 1;
     }
 
     to {
-        transform: rotateX(calc(360deg + var(--init-rotate-angle)));
+        opacity: 0;
+
     }
 }

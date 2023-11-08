@@ -37,17 +37,21 @@ export const GameField = ({ reRenderToggler, setGameStatus, restartGame }) => {
         setLineProps(null);
     }, [reRenderToggler]);
 
+    const animField = () => {
+        setFieldAnim(true);
+
+        setTimeout(() => {
+            restartGame();
+        }, 500);
+
+        setTimeout(() => {
+            setFieldAnim(false);
+        }, 600);
+    }
+
     const handleFieldClick = () => {
         if (!gameState.gameGoing) {
-            setFieldAnim(true);
-
-            setTimeout(() => {
-                restartGame();
-            }, 1100);
-
-            setTimeout(() => {
-                setFieldAnim(false);
-            }, 1500);
+            animField();
         }
     }
 
