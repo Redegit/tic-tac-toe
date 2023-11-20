@@ -39,7 +39,6 @@ export const GameContainer = () => {
         <main className={"container"}>
             {gameState.gameOpened
                 ? <>
-                    {/* <GameStat /> */}
                     <div id="status" className={"status"}>{gameStatus}</div>
                     <GameField restartGame={restartGame} setGameStatus={setGameStatus} reRenderToggler={reRenderToggler} />
                     <button onClick={restartGame} id="btn-restart" className={"btn"}>Заново</button>
