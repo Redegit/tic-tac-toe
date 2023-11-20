@@ -37,6 +37,12 @@ $ npm start
 $ npm run build
 ```
 
+Или создание и запуск docker-контейнера
+```sh
+$ docker build -t react-tic-tac-toe .    
+$ docker run -p 8080:80 react-tic-tac-toe
+```
+
 ## ToDo
 
 - [ ] Добавить сохранение и отображение счета текущих игроков
