@@ -12,9 +12,9 @@
 Изначально логика игры лежала и пылилась, будучи написанной на Python. Для проекта пришлось переписать её на чистом JS, а потом и адаптировать для React, когда было решено перенести на него весь проект.
 
 ## Скрины
-- ![Выбор имени](/git-images/img1.webp | height=250)
-- ![Игра](/git-images/img2.webp | height=250)
-- ![Конец игры](/git-images/img3.webp | height=250)
+![Выбор имени](git-images/img1.webp) 
+![Игра](git-images/img2.webp)
+![Конец игры](git-images/img3.webp)
 
 ## Технологии
 - [React](https://ru.legacy.reactjs.org/)
